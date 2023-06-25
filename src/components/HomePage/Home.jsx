@@ -68,6 +68,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { Link } from "react-router-dom";
 import { deleteUser } from "../../store/slices/CreateSlice";
 import { useNavigate } from "react-router-dom";
+import {FcFullTrash,FcEditImage} from "react-icons/fc";
 
 const Home = () => {
   const users = useSelector((state) => state.users.userList);
@@ -97,18 +98,19 @@ const Home = () => {
           {users.map((user) => (
             <tr key={user.id}>
               <td>{user.name}</td>
-              <td>{user.phone}</td>
               <td>{user.email}</td>
+              <td>{user.phone}</td>
+              
               <td>
-                <Link to={`/edit/${user.id}`} className="btn btn-primary">
-                  Edit
+                <Link to={`/edit/${user.id}`} className="btn-primary edit">
+                  <FcEditImage/>
                 </Link>
-                <button
+                <a
                   onClick={() => handleDelete(user.id)}
-                  className="btn btn-danger"
+                  className="btn-danger delete"
                 >
-                  Delete
-                </button>
+                 <FcFullTrash/>
+                </a>
               </td>
             </tr>
           ))}

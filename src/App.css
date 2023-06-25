@@ -116,6 +116,18 @@ label {
   cursor: pointer;
 }
 
+.edit{
+  display: inline;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.delete{
+  display: inline;
+  padding: 5px;
+  margin-right: 5px;
+}
+
 @media (max-width: 576px) {
   .form-container {
     padding: 15px;
@@ -125,3 +137,15 @@ label {
     font-size: 14px;
   }
 }
+
+
+@media (max-width: 450px) {
+  .edit{
+    margin-right: 1px;
+  }
+  
+  .delete{
+    margin-right: 0px;
+  }
+}
+

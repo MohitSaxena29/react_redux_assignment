@@ -68,6 +68,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateUser } from "../../store/slices/CreateSlice";
+// import { updateUser } from "./slices/CreateSlice";
+
 import { useDispatch } from "react-redux";
 import './Edit.css';
 
@@ -79,9 +81,11 @@ const Edit = () => {
 
   const [username, setUserName] = useState(existingUser.name);
   const [useremail, setUserEmail] = useState(existingUser.email);
+  const [userphone, setUserPhone] = useState(existingUser.phone);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log(userphone);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -90,6 +94,7 @@ const Edit = () => {
         id: id,
         name: username,
         email: useremail,
+        phone: userphone
       })
     );
     navigate("/");
@@ -120,6 +125,17 @@ const Edit = () => {
               placeholder="Email*"
               value={useremail}
               onChange={(e) => setUserEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Phone:</label>
+            <input
+              type="tel"
+              name="phone"
+              className="form-control"
+              placeholder="Phone*"
+              value={userphone}
+              onChange={(e) => setUserPhone(e.target.value)}
             />
           </div>
           <button className="btn btn-info update">Update</button>
