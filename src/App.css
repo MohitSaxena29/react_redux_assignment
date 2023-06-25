@@ -8,6 +8,8 @@
   color: #333;
   font-size: 24px;
   margin-bottom: 20px;
+  position: sticky;
+  z-index: 1;
 }
 
 .table {
@@ -127,6 +129,75 @@ label {
   padding: 5px;
   margin-right: 5px;
 }
+
+
+
+/* Nav Bar */
+
+/* Navbar */
+.container_empty{
+
+  position: fixed;
+
+  top: 45%;
+
+  left: 44%;
+
+  margin-top: -50px;
+
+  margin-left: -100px;
+
+  padding: 10px;
+  width: 400px;
+}
+.navlinks{
+  display: flex !important;
+} 
+.navlabels{
+  margin-right: 10px !important;
+}
+.bg-body-tertiary{
+  position:sticky;
+  top: 0;
+  z-index: 999;
+  background-color: black;
+}
+.navbar-brand{
+  color: #fff!important;
+}
+.navlabels a{
+  color: #fff!important;
+}
+.navbarScroll{
+  background-color: white;
+}
+.main-container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.nottedLink{
+color: beige
+}
+.viewcard{
+top: 50%;
+margin-top: 64px;
+margin-bottom: 10px;
+}
+.view-container{
+margin-left: 20px;
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+gap: 2vw;
+justify-content: start;
+
+}
+
+
 
 @media (max-width: 576px) {
   .form-container {

@@ -1,74 +1,12 @@
-// import React from "react";
-// import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux/es/hooks/useSelector";
-// import { Link } from "react-router-dom";
-// import { deleteUser } from "./UserReducer";
-// import { useNavigate } from "react-router-dom";
-// const Home=()=>{
-//     const users=useSelector((state)=> state.users.userList);
-//     console.log(users);
-//     const dispatch=useDispatch();
-//     const handleDelete=(id)=>{
-//         dispatch(deleteUser({id:id}));
-//     }
-//     return(
-//         <>
-//             <div className="container">
-//                 <h2>Crud App</h2>
-//                 <Link to='/create' className="btn btn-success my-3">Create +</Link>
-//                 <table>
-//                     <thead>
-//                     <tr>
-//                         <th>ID</th>
-//                         <th>Name</th>
-//                         <th>Email</th>
-//                     </tr>
-//                     </thead>
-//                     <tbody>
-//                         {
-//                             users.map((user,index)=>{
-//                                 return(
-//                                     <>
-//                                         <tr key={index}>
-//                                             <td>{user.id}</td>
-//                                             <td>{user.name}</td>
-//                                             <td>{user.email}</td>
-//                                             <td>
-//                                                 <Link to={`/edit/${user.id}`} className="btn btn-primary">Edit</Link>
-//                                                 <button onClick={()=>handleDelete(user.id)} className="btn btn-danger">Delete</button>
-//                                             </td>
-//                                         </tr>
-//                                     </>
-//                                 )
-
-//                             })
-//                         }
-//                     </tbody>
-
-//                 </table>
-//             </div>
-//         </>
-//     )
-// }
-
-// export default Home;
-
-
-
-
-
-
-
-
-
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { Link } from "react-router-dom";
 import { deleteUser } from "../../store/slices/CreateSlice";
 import { useNavigate } from "react-router-dom";
-import {FcFullTrash,FcEditImage} from "react-icons/fc";
+import { FcFullTrash, FcEditImage, FcViewDetails } from "react-icons/fc";
+import { Modal } from "react-bootstrap";
+import "./Home.css";
 
 const Home = () => {
   const users = useSelector((state) => state.users.userList);
@@ -79,44 +17,130 @@ const Home = () => {
     dispatch(deleteUser({ id: id }));
   };
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  const openModal = (user) => {
+    setSelectedUser(user);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setSelectedUser(null);
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="container">
-      <h2 className="header">Crud App</h2>
-      <Link to="/create" className="btn btn-success my-3">
-        Create +
-      </Link>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+    <>
+      <nav className="header">
+        <p>User Information</p>
+      </nav>
+      <div className="container">
+        <div className={`fixed-button-container ${scrolled ? "scrolled" : ""}`}>
+          <Link
+            to="/create"
+            className={`btn btn-success my-3 fixed-button ${
+              scrolled ? "scrolled" : ""
+            }`}
+          >
+            Add User +
+          </Link>
+        </div>
+        <div className="card-container">
           {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
-              
-              <td>
+            <div key={user.id} className="card">
+              <img
+                src={user.image}
+                className="card-img-top"
+                alt="User"
+                style={{ height: "180px" }}
+              />
+              <div className="card-body">
+                <h5 className="card-title">User Details</h5>
+                <p>
+                  <span>Name:</span> {user.name}
+                </p>
+                <p>
+                  <span>Email:</span> {user.email}
+                </p>
                 <Link to={`/edit/${user.id}`} className="btn-primary edit">
-                  <FcEditImage/>
+                  <FcEditImage />
                 </Link>
                 <a
                   onClick={() => handleDelete(user.id)}
                   className="btn-danger delete"
                 >
-                 <FcFullTrash/>
+                  <FcFullTrash />
                 </a>
-              </td>
-            </tr>
+                <a
+                  className="btn-primary edit"
+                  onClick={() => openModal(user)}
+                >
+                  <FcViewDetails />
+                </a>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </div>
+
+        {users.length === 0 && (
+            <div className="error">
+              <h1>Please Add User Data First</h1>
+            </div>
+        )}
+
+        <Modal show={showModal} onHide={closeModal}>
+          <Modal.Header>
+            <Modal.Title>User Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedUser && (
+              <div>
+                <img
+                  src={selectedUser.image}
+                  alt="User"
+                  className="image"
+                />
+                <p>
+                  <span>Name:</span> {selectedUser.name}
+                </p>
+                <p>
+                  <span>Email:</span> {selectedUser.email}
+                </p>
+                <p>
+                  <span>Phone No:</span> {selectedUser.phone}
+                </p>
+                <p>
+                  <span>Description:</span> {selectedUser.description}
+                </p>
+                <p>
+                  <span>Hobbies:</span> {selectedUser.hobbies}
+                </p>
+              </div>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <button className="btn btn-secondary" onClick={closeModal}>
+              Close
+            </button>
+          </Modal.Footer> 
+        </Modal>
+      </div>
+    </>
   );
 };
 
