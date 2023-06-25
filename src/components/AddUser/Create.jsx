@@ -55,7 +55,7 @@ const Create = () => {
 
         })
       );
-      navigate("/");
+      navigate("/home");
     }
   };
 
