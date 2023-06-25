@@ -14,6 +14,7 @@ const Edit = () => {
   const [useremail, setUserEmail] = useState(existingUser.email);
   const [userphone, setUserPhone] = useState(existingUser.phone);
   const [image, setImage] = useState(null); // State to store the selected image file
+  const [imagePreview, setImagePreview] = useState(existingUser.image); // State to store the URL of the selected image
   const [userdescription, setUserDescription] = useState(existingUser.description);
   const [userhobbies, setUserHobbies] = useState(existingUser.hobbies);
   const dispatch = useDispatch();
@@ -27,17 +28,18 @@ const Edit = () => {
         name: username,
         email: useremail,
         phone: userphone,
-        image: image ? URL.createObjectURL(image) : "", // Convert the image file to a URL
+        image: imagePreview,
         hobbies: userhobbies,
         description: userdescription
       })
     );
-    navigate("/");
+    navigate("/home");
   };
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     setImage(selectedFile);
+    setImagePreview(URL.createObjectURL(selectedFile));
   };
 
   return (
@@ -101,7 +103,7 @@ const Edit = () => {
           </div>
           <div className="form-group">
             <label htmlFor="hobbies">Hobbies:</label>
-            <textarea
+            <input
               type="text"
               name="hobbies"
               className="form-control"

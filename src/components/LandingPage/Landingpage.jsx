@@ -7,7 +7,6 @@ const Landingpage=()=> {
   const gotoApp=()=>{
     navigate('/home');
   }
-
   return (
     <>
       <div className="d-flex mt-5 justify-content-center align-items-center landing-page-container">
@@ -18,7 +17,7 @@ const Landingpage=()=> {
             <p className="card-text ct">
               <ul>
                 <h4>
-                  This User Management App have following features : 
+                  This User Information App have following features : 
                 </h4>
                 <li>Add User Data</li>
                 <li>Update User Data by clicking on <FcFullTrash/> icon</li>

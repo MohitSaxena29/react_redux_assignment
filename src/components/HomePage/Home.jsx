@@ -67,7 +67,7 @@ const Home = () => {
                 src={user.image}
                 className="card-img-top"
                 alt="User"
-                style={{ height: "180px" }}
+                style={{ height: "170px" }}
               />
               <div className="card-body">
                 <h5 className="card-title">User Details</h5>
@@ -98,9 +98,9 @@ const Home = () => {
         </div>
 
         {users.length === 0 && (
-            <div className="error">
-              <h1>Please Add User Data First</h1>
-            </div>
+          <div className="error">
+            <h1>Please Add User Data First</h1>
+          </div>
         )}
 
         <Modal show={showModal} onHide={closeModal}>
@@ -110,11 +110,7 @@ const Home = () => {
           <Modal.Body>
             {selectedUser && (
               <div>
-                <img
-                  src={selectedUser.image}
-                  alt="User"
-                  className="image"
-                />
+                <img src={selectedUser.image} alt="User" className="image" />
                 <p>
                   <span>Name:</span> {selectedUser.name}
                 </p>
@@ -137,7 +133,7 @@ const Home = () => {
             <button className="btn btn-secondary" onClick={closeModal}>
               Close
             </button>
-          </Modal.Footer> 
+          </Modal.Footer>
         </Modal>
       </div>
     </>
@@ -145,3 +141,4 @@ const Home = () => {
 };
 
 export default Home;
+
