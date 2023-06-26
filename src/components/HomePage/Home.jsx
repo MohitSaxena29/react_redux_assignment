@@ -66,7 +66,6 @@ const Home = () => {
                 src={user.image}
                 className="card-img-top"
                 alt="User"
-                style={{ height: "120px" }}
               />
               <div className="card-body">
                 <h5 className="card-title">User Details</h5>

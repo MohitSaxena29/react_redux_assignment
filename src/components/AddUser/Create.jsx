@@ -121,11 +121,11 @@ const Create = () => {
           </div>
           <div className="form-group">
             <label htmlFor="hobbies">Hobbies:</label>
-            <textarea
+            <input
               type="text"
               name="hobbies"
               className="form-control"
-              placeholder="Hobbies* e.g.(cricket,coding etc)"
+              placeholder="Hobbies*  e.g.(cricket,coding etc)"
               onChange={(e) => setHobbies(e.target.value)}
             />
           </div>
