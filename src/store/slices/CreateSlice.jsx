@@ -4,25 +4,42 @@ const initialState = {
   userList: []
 };
 
+const loadState = () => {
+    const getStateData = sessionStorage.getItem("userList");
+    if (getStateData === null) {
+      return initialState;
+    }
+    return JSON.parse(getStateData);
+};
+
+const saveState = (state) => {
+    const updateStateData = JSON.stringify(state);
+    sessionStorage.setItem("userList", updateStateData);
+};
+
 const userSlice = createSlice({
   name: 'users',
-  initialState,
+  initialState: loadState(),
   reducers: {
     addUser: (state, action) => {
-      const { id, name, email, phone, image,hobbies,description } = action.payload;
+      const { id, name, email, phone, image, hobbies, description } = action.payload;
+      const newUser = { id, name, email, phone, image, hobbies, description };
+      const updatedUserList = [...state.userList, newUser];
+      saveState({ userList: updatedUserList });
       return {
         ...state,
-        userList: [...state.userList, { id, name, email, phone, image,hobbies,description }]
+        userList: updatedUserList
       };
     },
     updateUser: (state, action) => {
-      const { id, name, email, phone, image,hobbies,description } = action.payload;
+      const { id, name, email, phone, image, hobbies, description } = action.payload;
       const updatedUserList = state.userList.map(user => {
         if (user.id.toString() === id) {
           return { ...user, name, email, phone, image, hobbies, description };
         }
         return user;
       });
+      saveState({ userList: updatedUserList });
       return {
         ...state,
         userList: updatedUserList
@@ -31,6 +48,7 @@ const userSlice = createSlice({
     deleteUser: (state, action) => {
       const { id } = action.payload;
       const updatedUserList = state.userList.filter(user => user.id !== id);
+      saveState({ userList: updatedUserList });
       return {
         ...state,
         userList: updatedUserList
