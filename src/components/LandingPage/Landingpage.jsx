@@ -20,9 +20,9 @@ const Landingpage=()=> {
                   This User Information App have following features : 
                 </h4>
                 <li>Add User Data</li>
-                <li>Update User Data by clicking on <FcFullTrash/> icon</li>
-                <li>View User data by clicking on <FcEditImage/> icon</li>
-                <li>Delete User data by clicking on <FcViewDetails/> icon</li>
+                <li>Update User Data by clicking on <FcViewDetails/> icon</li>
+                <li>View User data by clicking on <FcEditImage/> icon (in modale)</li>
+                <li>Delete User data by clicking on <FcFullTrash/> icon</li>
               </ul>
             </p>
             <button className="btn btn-primary" onClick={gotoApp}>Go to App</button>
