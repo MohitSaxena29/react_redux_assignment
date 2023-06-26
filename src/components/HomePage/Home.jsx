@@ -20,7 +20,6 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [scrolled, setScrolled] = useState(false);
-
   const openModal = (user) => {
     setSelectedUser(user);
     setShowModal(true);
@@ -67,7 +66,7 @@ const Home = () => {
                 src={user.image}
                 className="card-img-top"
                 alt="User"
-                style={{ height: "170px" }}
+                style={{ height: "120px" }}
               />
               <div className="card-body">
                 <h5 className="card-title">User Details</h5>
@@ -110,7 +109,7 @@ const Home = () => {
           <Modal.Body>
             {selectedUser && (
               <div>
-                <img src={selectedUser.image} alt="User" className="image" />
+                <img src={selectedUser.image} alt="NO Image Chosen" className="image" />
                 <p>
                   <span>Name:</span> {selectedUser.name}
                 </p>

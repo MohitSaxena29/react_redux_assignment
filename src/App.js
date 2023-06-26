@@ -5,6 +5,7 @@ import Edit from './components/UpdateUser/Edit';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import  {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Landingpage from './components/LandingPage/Landingpage';
+import Error from './components/Error/Error';
 function App() {
   return (
   <>
@@ -14,6 +15,7 @@ function App() {
           <Route path='/home' element={<Home/>}/>
           <Route path='/create' element={<Create/>}/>
           <Route path='/edit/:id' element={<Edit/>}/>
+          <Route path='*' element={<Error/>}/>
         </Routes>
       </BrowserRouter>
   </>

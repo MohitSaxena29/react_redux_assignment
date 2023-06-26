@@ -13,8 +13,8 @@ const Edit = () => {
   const [username, setUserName] = useState(existingUser.name);
   const [useremail, setUserEmail] = useState(existingUser.email);
   const [userphone, setUserPhone] = useState(existingUser.phone);
-  const [image, setImage] = useState(null); // State to store the selected image file
-  const [imagePreview, setImagePreview] = useState(existingUser.image); // State to store the URL of the selected image
+  const [image, setImage] = useState(null); 
+  const [imagePreview, setImagePreview] = useState(existingUser.image); 
   const [userdescription, setUserDescription] = useState(existingUser.description);
   const [userhobbies, setUserHobbies] = useState(existingUser.hobbies);
   const dispatch = useDispatch();
@@ -87,7 +87,7 @@ const Edit = () => {
               name="image"
               className="form-control"
               accept="image/*"
-              onChange={handleImageChange} // Handle the image file change
+              onChange={handleImageChange} 
             />
           </div>
           <div className="form-group">

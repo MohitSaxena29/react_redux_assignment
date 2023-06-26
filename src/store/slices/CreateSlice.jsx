@@ -5,16 +5,16 @@ const initialState = {
 };
 
 const loadState = () => {
-    const getStateData = sessionStorage.getItem("userList");
-    if (getStateData === null) {
-      return initialState;
-    }
-    return JSON.parse(getStateData);
+  const getStateData = sessionStorage.getItem("userList");
+  if (getStateData === null) {
+    return initialState;
+  }
+  return JSON.parse(getStateData);
 };
 
 const saveState = (state) => {
-    const updateStateData = JSON.stringify(state);
-    sessionStorage.setItem("userList", updateStateData);
+  const updateStateData = JSON.stringify(state);
+  sessionStorage.setItem("userList", updateStateData);
 };
 
 const userSlice = createSlice({

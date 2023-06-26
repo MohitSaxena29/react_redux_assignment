@@ -118,6 +118,8 @@ label {
   cursor: pointer;
 }
 
+
+
 .edit{
   display: inline;
   padding: 5px;
@@ -130,11 +132,6 @@ label {
   margin-right: 5px;
 }
 
-
-
-/* Nav Bar */
-
-/* Navbar */
 .container_empty{
 
   position: fixed;

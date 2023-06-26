@@ -10,8 +10,8 @@ const Create = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [image, setImage] = useState(null); // State to store the selected image file
-  const [hobbies,setHobbies] = useState("");
-  const [description,setDescription]= useState("");
+  const [hobbies, setHobbies] = useState("");
+  const [description, setDescription] = useState("");
   const users = useSelector((state) => state.users.userList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,29 +30,22 @@ const Create = () => {
       toast.error("Please enter Phone");
     } else if (!/^[0-9]{10}$/.test(phone)) {
       toast.error("Phone Number is not valid");
-    } 
-    else if(description.trim()==="" ){
+    } else if (description.trim() === "") {
       toast.error("Please enter your description");
-    }
-    else if(description.trim().length<15)
-    {
+    } else if (description.trim().length < 15) {
       toast.error("Descripition length should be greater than 15 characters");
-    }
-    else if(hobbies.trim()==='')
-    {
+    } else if (hobbies.trim() === "") {
       toast.error("Please enter your hobbies");
-    }
-    else {
+    } else {
       dispatch(
         addUser({
           id: users.length,
           name: name,
           email: email,
           phone: phone,
-          image: image ? URL.createObjectURL(image) : "",
+          image: image,
           hobbies: hobbies,
-          description: description
-
+          description: description,
         })
       );
       navigate("/home");
@@ -61,8 +54,17 @@ const Create = () => {
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
-    setImage(selectedFile);
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+
+    if (selectedFile) {
+      reader.readAsDataURL(selectedFile);
+    }
   };
+
   return (
     <div className="d-flex w-100 vh-100 justify-content-center align-items-center">
       <div className="form-container">
@@ -136,3 +138,9 @@ const Create = () => {
 };
 
 export default Create;
+
+
+
+
+
+
